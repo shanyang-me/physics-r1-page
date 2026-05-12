@@ -95,8 +95,8 @@
       "description": "6,432-record audit-clean PhysCorp-A v2. Subset of the 14,294 pre-audit pool that (i) survives the construction-audit Stage-1 (5-gram Jaccard >= 0.4) and Stage-2 (mxbai-embed-large-v1 cosine >= 0.85) audits against eval_mini, eval_full, PhysOlym-A, PhyX-test, MMMU-Pro Physics, and OlympiadBench-Physics-EN (yielding a 7,236-record candidate), and then (ii) survives a joint re-audit pass against PhysReason-full and PhysUniBench-en (which were not in the construction-audit set) at the same thresholds, which dropped 804 additional records dominated by PhysReason-full (540) and PhysUniBench-en (186). The released v2 is joint-clean (0/0 by construction) at the joint operating thresholds against all six paper-canonical evals.",
       "encodingFormat": "application/vnd.apache.parquet",
       "contentUrl": "https://huggingface.co/datasets/shanyangmie/physcorp-a/resolve/main/physcorp_a.parquet",
-      "contentSize": "2420741 B",
-      "sha256": "438523a0c8812434db17388c40d54e118e10a9cc6a87749686e40d275ee4c9af"
+      "contentSize": "2445675 B",
+      "sha256": "a6440aba2835b19a27cba32f780afdf43c0d0c659e4ccf64fb4a04c65977c097"
     },
     {
       "@type": "cr:FileObject",
