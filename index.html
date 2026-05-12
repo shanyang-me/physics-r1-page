@@ -155,21 +155,21 @@
               </span>
 
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/physics-r1-anonymous/physcorp-a" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://huggingface.co/datasets/shanyangmie/physcorp-a" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">&#x1F917;</span>
                   <span>PhysCorp-A</span>
                 </a>
               </span>
 
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/physics-r1-anonymous/physr1corp" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://huggingface.co/datasets/shanyangmie/physr1corp" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">&#x1F917;</span>
                   <span>PhysR1Corp</span>
                 </a>
               </span>
 
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/physics-r1-anonymous/physolym-a" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://huggingface.co/datasets/shanyangmie/physolym-a" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">&#x1F917;</span>
                   <span>PhysOlym-A</span>
                 </a>
@@ -315,25 +315,25 @@
               <td><strong>PhysCorp-A</strong></td>
               <td>6,432 records</td>
               <td>Audited multimodal physics corpus (fully Stage-3 clean against six public evals).</td>
-              <td><a href="https://huggingface.co/datasets/physics-r1-anonymous/physcorp-a" target="_blank">&#x1F917; HuggingFace</a></td>
+              <td><a href="https://huggingface.co/datasets/shanyangmie/physcorp-a" target="_blank">&#x1F917; HuggingFace</a></td>
             </tr>
             <tr>
               <td><strong>PhysR1Corp</strong></td>
               <td>2,268 records</td>
               <td>Closed-form RL training pool (numeric / MCQ-gradable carve-out).</td>
-              <td><a href="https://huggingface.co/datasets/physics-r1-anonymous/physr1corp" target="_blank">&#x1F917; HuggingFace</a></td>
+              <td><a href="https://huggingface.co/datasets/shanyangmie/physr1corp" target="_blank">&#x1F917; HuggingFace</a></td>
             </tr>
             <tr>
               <td><strong>PhysOlym-A</strong></td>
               <td>500 problems</td>
               <td>Held-out olympiad eval, 99.8% novel-source, EN/ET bilingual, native difficulty.</td>
-              <td><a href="https://huggingface.co/datasets/physics-r1-anonymous/physolym-a" target="_blank">&#x1F917; HuggingFace</a></td>
+              <td><a href="https://huggingface.co/datasets/shanyangmie/physolym-a" target="_blank">&#x1F917; HuggingFace</a></td>
             </tr>
             <tr>
               <td><strong>PhysCorp-pre-audit</strong></td>
               <td>14,294 records</td>
               <td>Raw pre-audit pool &mdash; released so users can re-run the audit.</td>
-              <td><a href="https://huggingface.co/datasets/physics-r1-anonymous/physcorp-pre-audit" target="_blank">&#x1F917; HuggingFace</a></td>
+              <td><a href="https://huggingface.co/datasets/shanyangmie/physcorp-pre-audit" target="_blank">&#x1F917; HuggingFace</a></td>
             </tr>
             <tr>
               <td><strong>Physics-R1 (recipe)</strong></td>
@@ -391,7 +391,7 @@
     <p class="has-text-centered" style="color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem;">
       <em>PhysCorp-A</em>: 1,609 first-ML olympiad records (Estonian PhO, Zhou, IPhO+NBPhO+EuPhO, APhO+USAPhO+INPhO) preserved in full;
       remaining 4,823 from repackaged sources after the three-stage audit (per-family counts shown are approximate, allocated proportionally from the
-      <a href="https://huggingface.co/datasets/physics-r1-anonymous/physcorp-pre-audit" target="_blank">pre-audit pool</a>; exact counts available in the released dataset card).
+      <a href="https://huggingface.co/datasets/shanyangmie/physcorp-pre-audit" target="_blank">pre-audit pool</a>; exact counts available in the released dataset card).
     </p>
   </div>
 </section>
@@ -483,7 +483,7 @@ python audit/audit_two_stage.py \
 
       <h4 class="title is-5" style="margin-top: 1.5rem;">Load PhysOlym-A</h4>
       <pre><code>from datasets import load_dataset
-ds = load_dataset("physics-r1-anonymous/physolym-a", split="test")
+ds = load_dataset("shanyangmie/physolym-a", split="test")
 print(ds[0])  # {source, messages, solution, metadata}</code></pre>
     </div>
   </div>

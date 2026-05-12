@@ -52,10 +52,10 @@
   "name": "Physics-R1",
   "description": "Physics-R1: An audited visual physics RL training corpus and held-out olympiad evaluation. This Croissant aggregates the four Hugging Face datasets that ship with the NeurIPS 2026 Datasets & Benchmarks submission. Lineage: 14,294 pre-audit raw master corpus -> 7,236 construction-audit-clean candidate (Stage-1 5-gram Jaccard >= 0.4 union Stage-2 mxbai-embed-large cosine >= 0.85, construction-audit set: eval_mini, eval_full, PhysOlym-A, PhyX-test, MMMU-Pro Physics, OlympiadBench-Physics-EN) -> 6,432 audit-clean PhysCorp-A v2 after a joint re-audit pass against PhysReason-full and PhysUniBench-en (which were not in the construction-audit set) dropped 804 leaking records (PhysReason-full 540, PhysUniBench-en 186 dominant) -> 2,268 closed-form RL pool PhysR1Corp via three sequential cleanup passes from a 2,433-record candidate: (i) one PR-full duplicate at cos=0.984 dropped, (ii) 87 records dropped against MMMU-Pro Physics under joint Stage-1 OR Stage-2 thresholds, (iii) 78 records dropped at Stage-2 cos>=0.85 against PhyX-mini (69 near-duplicate variants, top cos 0.93) and PhysUniBench-en (9 template duplicates), with 19 remaining Stage-2 hits across PhysOlym-A/MMMU-Pro/OlymBench/PhysReason kept as same-topic neighbors (top cos <= 0.87). Held-out evaluation: 500-record PhysOlym-A (99.8% novel-source). Per-eval audit results vs PhysR1Corp 2,268 (Stage-1 / Stage-2 / Stage-3 close-duplicates): OlympiadBench-Physics 0/4/0, PhyX-mini 0/0/0, MMMU-Pro Physics 0/1/0, PhysOlym-A 0/3/0, PhysReason-full 0/11/0, PhysUniBench-en 0/0/0 (all 19 remaining Stage-2 hits are same-topic neighbors at top cos <= 0.87). Code, audit pipeline, training recipe, eval harness, and Sonnet-as-judge scripts are released at https://github.com/shanyang-me/physics-r1-neurips2026.",
   "version": "1.4.0",
-  "datePublished": "2026-05-07",
+  "datePublished": "2026-05-12",
   "license": "CC BY-NC 4.0 (data); Apache-2.0 (code)",
   "url": "https://github.com/shanyang-me/physics-r1-neurips2026",
-  "citeAs": "@inproceedings{physicsr1_2026,\n  title={Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning},\n  author={Anonymous},\n  booktitle={NeurIPS 2026 Datasets and Benchmarks Track},\n  year={2026}\n}",
+  "citeAs": "@inproceedings{yang2026physicsr1,\n  title     = {Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning},\n  author    = {Yang, Shan},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track},\n  year      = {2026}\n}",
   "keywords": [
     "physics",
     "visual reasoning",
@@ -69,7 +69,7 @@
   "creator": [
     {
       "@type": "sc:Person",
-      "name": "Anonymous Authors"
+      "name": "Shan Yang"
     }
   ],
   "publisher": {
@@ -84,7 +84,7 @@
       "name": "physcorp_pre_audit",
       "description": "14,294-record pre-audit raw master corpus aggregating nine source families before the two-stage contamination audit. Released so users can re-run the audit at different thresholds or against new external benchmarks.",
       "encodingFormat": "application/vnd.apache.parquet",
-      "contentUrl": "https://huggingface.co/datasets/physics-r1-anonymous/physcorp-pre-audit/resolve/main/physcorp_pre_audit.parquet",
+      "contentUrl": "https://huggingface.co/datasets/shanyangmie/physcorp-pre-audit/resolve/main/physcorp_pre_audit.parquet",
       "contentSize": "9661275 B",
       "sha256": "cba56d6557f8930d39ac6f0c89f74550542a83aa4fc8a1848072a470e76c34e7"
     },
@@ -94,7 +94,7 @@
       "name": "physcorp_a",
       "description": "6,432-record audit-clean PhysCorp-A v2. Subset of the 14,294 pre-audit pool that (i) survives the construction-audit Stage-1 (5-gram Jaccard >= 0.4) and Stage-2 (mxbai-embed-large-v1 cosine >= 0.85) audits against eval_mini, eval_full, PhysOlym-A, PhyX-test, MMMU-Pro Physics, and OlympiadBench-Physics-EN (yielding a 7,236-record candidate), and then (ii) survives a joint re-audit pass against PhysReason-full and PhysUniBench-en (which were not in the construction-audit set) at the same thresholds, which dropped 804 additional records dominated by PhysReason-full (540) and PhysUniBench-en (186). The released v2 is joint-clean (0/0 by construction) at the joint operating thresholds against all six paper-canonical evals.",
       "encodingFormat": "application/vnd.apache.parquet",
-      "contentUrl": "https://huggingface.co/datasets/physics-r1-anonymous/physcorp-a/resolve/main/physcorp_a.parquet",
+      "contentUrl": "https://huggingface.co/datasets/shanyangmie/physcorp-a/resolve/main/physcorp_a.parquet",
       "contentSize": "2420741 B",
       "sha256": "438523a0c8812434db17388c40d54e118e10a9cc6a87749686e40d275ee4c9af"
     },
@@ -104,7 +104,7 @@
       "name": "physr1corp",
       "description": "2,268-record closed-form RL training pool. Carve-out of PhysCorp-A v2 (6,432-record audited corpus) keeping only numeric / MCQ-gradable items (binary correctness reward is defined on closed-form gold). Three decontamination passes: (1) one record dropped where Stage-2 mxbai cosine >= 0.85 flagged near-text duplication against PhysReason-full (lightning-charge, cos=0.984); (2) 87 records dropped against MMMU-Pro Physics under joint Stage-1 (J>=0.4) OR Stage-2 (cos>=0.85) audit, covering 52/60 = 86.7% of MMMU-Pro; (3) 78 records dropped against PhyX-mini (69) and PhysUniBench-en (9 template duplicates) at Stage-2 cos>=0.85 (top cos ~ 0.93 confirmed real physics-problem variants by manual inspection). 18 remaining Stage-2 hits across PhysOlym-A (3), MMMU-Pro (1), OlymBench-Phys (4), PhysReason-full (10) are topic-similarity false positives (top cos <= 0.87) and kept in pool. This is the pool used for Physics-R1 RL training in Table 2.",
       "encodingFormat": "application/vnd.apache.parquet",
-      "contentUrl": "https://huggingface.co/datasets/physics-r1-anonymous/physr1corp/resolve/main/physr1corp.parquet",
+      "contentUrl": "https://huggingface.co/datasets/shanyangmie/physr1corp/resolve/main/physr1corp.parquet",
       "contentSize": "418266 B",
       "sha256": "242ceb09641b41f885bd18ab2800e3faffd43e1f142ae504e5948122f9135372"
     },
@@ -114,7 +114,7 @@
       "name": "PhysOlym-A",
       "description": "500-problem 99.8%-novel-source open-ended olympiad held-out evaluation. Composed of ~200 problems from Kevin Zhou's olympiad handouts, ~136 from the Estonian Physics Olympiad (with native 1-10 difficulty labels and 201-problem bilingual EN/ET subset), ~85 from IPhO/NBPhO/EuPhO, ~79 from APhO/USAPhO/INPhO. The single 0.2% non-novel record is an EuPhO 2020 problem also present in OlympiadBench-Physics.",
       "encodingFormat": "application/x-jsonlines",
-      "contentUrl": "https://huggingface.co/datasets/physics-r1-anonymous/physolym-a/resolve/main/physolym-a.jsonl",
+      "contentUrl": "https://huggingface.co/datasets/shanyangmie/physolym-a/resolve/main/physolym-a.jsonl",
       "contentSize": "3552798 B",
       "sha256": "e338a22814a8653dc3a90fba5bc66539933b3d56c82309b54e7fd374c5f66042"
     }
