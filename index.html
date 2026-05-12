@@ -6,13 +6,13 @@
 
   <meta name="title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
   <meta name="description" content="A three-stage contamination audit (Jaccard → embedding cosine → LLM judge) surfaces 134 SciInstruct near-duplicates that single-stage audits miss, plus a 17-pp Estonian–English translation delta and a 46-pp format-and-novelty gradient. Releases PhysCorp-A, PhysR1Corp, PhysOlym-A, and the Physics-R1 RL recipe.">
-  <meta name="keywords" content="physics reasoning, multimodal, vision-language model, contamination audit, olympiad benchmark, RL from verifiable rewards, LLM-as-judge, NeurIPS 2026">
+  <meta name="keywords" content="physics reasoning, multimodal, vision-language model, contamination audit, olympiad benchmark, RL from verifiable rewards, LLM-as-judge">
   <meta name="author" content="Shan Yang">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
-  <meta property="og:description" content="An audited multimodal physics corpus + 99.8%-novel-source held-out olympiad eval + a binary-reward GSPO+DAPO recipe. NeurIPS 2026 Datasets & Benchmarks.">
+  <meta property="og:description" content="An audited multimodal physics corpus + 99.8%-novel-source held-out olympiad eval + a binary-reward GSPO+DAPO recipe.">
   <meta property="og:url" content="https://shanyang-me.github.io/physics-r1-page/">
   <meta property="og:image" content="https://shanyang-me.github.io/physics-r1-page/static/images/social_preview.png">
 
@@ -24,7 +24,6 @@
   <meta name="citation_title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
   <meta name="citation_author" content="Yang, Shan">
   <meta name="citation_publication_date" content="2026">
-  <meta name="citation_conference_title" content="NeurIPS 2026 Datasets and Benchmarks Track">
   <meta name="citation_pdf_url" content="https://shanyang-me.github.io/physics-r1-page/static/pdfs/physics-r1.pdf">
 
   <title>Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning</title>
@@ -134,9 +133,6 @@
             </span>
           </div>
 
-          <div class="is-size-5 publication-venue" style="margin-top: 1rem; color: #6b7280;">
-            <strong>NeurIPS 2026</strong> &mdash; Datasets &amp; Benchmarks Track
-          </div>
 
           <div class="column has-text-centered" style="margin-top: 1.5rem;">
             <div class="publication-links">
@@ -148,7 +144,7 @@
               </span>
 
               <span class="link-block">
-                <a href="https://github.com/shanyang-me/physics-r1-neurips2026" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://github.com/shanyang-me/physics-r1-code" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
                 </a>
@@ -267,7 +263,7 @@
     <div class="content" style="margin-top: 1.5rem;">
       <p class="has-text-centered" style="color: #6b7280;">
         Pairwise across the training pool and six public physics evals; pseudocode in
-        <a href="https://github.com/shanyang-me/physics-r1-neurips2026/tree/main/audit" target="_blank">audit/</a>.
+        <a href="https://github.com/shanyang-me/physics-r1-code/tree/main/audit" target="_blank">audit/</a>.
       </p>
 
       <div class="pipeline-stage">
@@ -339,13 +335,13 @@
               <td><strong>Physics-R1 (recipe)</strong></td>
               <td>code + config</td>
               <td>GSPO+DAPO recipe cold-started from Qwen3-VL-8B-Thinking with binary correctness reward.</td>
-              <td><a href="https://github.com/shanyang-me/physics-r1-neurips2026" target="_blank">GitHub</a></td>
+              <td><a href="https://github.com/shanyang-me/physics-r1-code" target="_blank">GitHub</a></td>
             </tr>
             <tr>
               <td><strong>Audit pipeline</strong></td>
               <td>Python</td>
               <td>Three-stage contamination audit (<code>audit/</code>) + saved best-overlap scores + judge labels.</td>
-              <td><a href="https://github.com/shanyang-me/physics-r1-neurips2026/tree/main/audit" target="_blank">GitHub</a></td>
+              <td><a href="https://github.com/shanyang-me/physics-r1-code/tree/main/audit" target="_blank">GitHub</a></td>
             </tr>
           </tbody>
         </table>
@@ -470,8 +466,8 @@
 
     <div class="content">
       <h4 class="title is-5">Run the audit pipeline</h4>
-      <pre><code>git clone https://github.com/shanyang-me/physics-r1-neurips2026
-cd physics-r1-neurips2026
+      <pre><code>git clone https://github.com/shanyang-me/physics-r1-code
+cd physics-r1-code
 pip install -r requirements.txt
 
 python audit/audit_two_stage.py \
@@ -493,11 +489,10 @@ print(ds[0])  # {source, messages, solution, metadata}</code></pre>
 <section class="section">
   <div class="container is-max-desktop content">
     <h2 class="title is-3 has-text-centered">BibTeX</h2>
-    <pre style="font-size: 0.9em;"><code>@inproceedings{yang2026physicsr1,
-  title     = {Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning},
-  author    = {Yang, Shan},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track},
-  year      = {2026}
+    <pre style="font-size: 0.9em;"><code>@misc{yang2026physicsr1,
+  title  = {Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning},
+  author = {Yang, Shan},
+  year   = {2026}
 }</code></pre>
   </div>
 </section>
@@ -509,7 +504,7 @@ print(ds[0])  # {source, messages, solution, metadata}</code></pre>
       <div class="column is-8">
         <div class="content has-text-centered">
           <p>
-            Code: <a href="https://github.com/shanyang-me/physics-r1-neurips2026">github.com/shanyang-me/physics-r1-neurips2026</a><br>
+            Code: <a href="https://github.com/shanyang-me/physics-r1-code">github.com/shanyang-me/physics-r1-code</a><br>
             Datasets are released under <strong>CC BY-NC 4.0</strong> (per-source provenance in the paper appendix).
             Code is released under the <strong>Apache-2.0</strong> license.
           </p>
