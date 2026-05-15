@@ -137,9 +137,16 @@
           <div class="column has-text-centered" style="margin-top: 1.5rem;">
             <div class="publication-links">
               <span class="link-block">
+                <a href="https://arxiv.org/abs/2605.14040" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <span class="link-block">
                 <a href="static/pdfs/physics-r1.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
+                  <span>PDF</span>
                 </a>
               </span>
 
@@ -427,13 +434,13 @@
           <tr><td>Qwen3-VL-8B-Thinking (base)</td><td>73.7</td><td>74.4</td><td>23.9</td><td>35.3</td><td>39.3</td><td>8.0</td></tr>
           <tr><td>InternVL3-8B</td><td>46.8</td><td>43.1</td><td>13.3</td><td>23.5</td><td>10.4</td><td>4.0</td></tr>
           <tr class="ours">
-            <td>Physics-R1 (binary, recommended)</td>
-            <td>78.0 <span class="delta">+4.3</span></td>
-            <td>76.9 <span class="delta">+2.5</span></td>
-            <td>29.8 <span class="delta">+5.9</span></td>
-            <td>37.0 <span class="delta">+1.7</span></td>
-            <td>45.4 <span class="delta">+6.1</span></td>
-            <td>25.6 <span class="delta">+17.6</span></td>
+            <td>Physics-R1 (binary, 3-seed mean &plusmn; &sigma;)</td>
+            <td>77.8 &plusmn; 0.3 <span class="delta">+4.1</span></td>
+            <td>76.9 &plusmn; 0.3 <span class="delta">+2.5</span></td>
+            <td>39.6 &plusmn; 6.4 <span class="delta">+15.7</span></td>
+            <td>34.8 &plusmn; 3.3 <span class="delta">&minus;0.5</span></td>
+            <td>46.2 &plusmn; 1.5 <span class="delta">+6.9</span></td>
+            <td>26.3 &plusmn; 1.7 <span class="delta">+18.3</span></td>
           </tr>
           <tr class="ours">
             <td>Physics-R1 (dense, ablation)</td>
@@ -449,12 +456,12 @@
     </div>
 
     <p class="has-text-centered" style="color: #6b7280; margin-top: 1rem; font-size: 0.95em;">
-      Physics-R1 binary lifts PhysOlym-A liberal +17.6 pp over the 8B base, still 7.8 pp below Sonnet 4.5.
+      Physics-R1 binary lifts PhysOlym-A liberal +18.3 pp over the 8B base, still 7.1 pp below Sonnet 4.5.
       Recipe is reported as evidence the audited corpus is trainable, not as a SOTA capability claim.
     </p>
     <p class="has-text-centered" style="color: #6b7280; margin-top: 0.5rem; font-size: 0.85em;">
-      <strong>Seed corroborators:</strong> seed-17/step-63 = 26.9, seed-23/step-60 = 28.2 on PhysOlym-A liberal
-      (3-seed mean &asymp; 26.9, range 2.6 pp; paper single-seed = 25.6). Full 3-seed sweep committed for camera-ready.
+      <strong>3-seed sweep on PhysOlym-A liberal:</strong> seed-42 = 25.6, seed-17 = 25.0, seed-23 = 28.2
+      (mean 26.3 &plusmn; 1.7); seeds &#123;42, 17, 23&#125; on the audited <em>PhysR1Corp</em>.
     </p>
   </div>
 </section>
