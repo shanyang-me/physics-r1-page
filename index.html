@@ -4,29 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
-  <meta name="description" content="A three-stage contamination audit (Jaccard → embedding cosine → LLM judge) surfaces 134 SciInstruct near-duplicates that single-stage audits miss, plus a 17-pp Estonian–English translation delta and a 46-pp format-and-novelty gradient. Releases PhysCorp-A, PhysR1Corp, PhysOlym-A, and the Physics-R1 RL recipe.">
+  <meta name="title" content="Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning">
+  <meta name="description" content="Five findings on how physics training-and-evaluation systems silently break (contamination, translation, MCQ saturation, exploitable shaped rewards, judge dependence) and three released verifiers that close the gaps: a three-stage contamination audit, a binary training-reward verifier, and an answer-judging harness. Releases PhysCorp-A, PhysR1Corp, PhysOlym-A, and the Physics-R1 reference recipe.">
   <meta name="keywords" content="physics reasoning, multimodal, vision-language model, contamination audit, olympiad benchmark, RL from verifiable rewards, LLM-as-judge">
   <meta name="author" content="Shan Yang">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
-  <meta property="og:description" content="An audited multimodal physics corpus + 99.8%-novel-source held-out olympiad eval + a binary-reward GSPO+DAPO recipe.">
+  <meta property="og:title" content="Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning">
+  <meta property="og:description" content="One verifiable training-and-evaluation system: five findings, three released verifiers, an audited corpus, a 99.8%-novel-source held-out olympiad eval, and a binary-reward reference recipe.">
   <meta property="og:url" content="https://shanyang-me.github.io/physics-r1-page/">
   <meta property="og:image" content="https://shanyang-me.github.io/physics-r1-page/static/images/social_preview.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
-  <meta name="twitter:description" content="Three-stage audit surfaces 134 SciInstruct near-dups single-stage misses · 17-pp ET–EN translation delta · 46-pp format-novelty gradient · PhysOlym-A 99.8% novel-source held-out olympiad eval.">
+  <meta name="twitter:title" content="Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning">
+  <meta name="twitter:description" content="Five findings: 134 hidden near-dups · 17-pp translation delta · 46-pp format gradient · binary beats shaped rewards · judge swap moves scores up to +37 pp. Three released verifiers close the gaps.">
   <meta name="twitter:image" content="https://shanyang-me.github.io/physics-r1-page/static/images/social_preview.png">
 
-  <meta name="citation_title" content="Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning">
+  <meta name="citation_title" content="Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning">
   <meta name="citation_author" content="Yang, Shan">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_pdf_url" content="https://shanyang-me.github.io/physics-r1-page/static/pdfs/physics-r1.pdf">
 
-  <title>Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning</title>
+  <title>Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning</title>
 
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -118,7 +118,7 @@
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Physics-R1</h1>
           <h2 class="subtitle is-3 publication-subtitle" style="margin-top: 0.5rem; font-weight: 500;">
-            An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning
+            An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning
           </h2>
 
           <div class="is-size-5 publication-authors" style="margin-top: 1.5rem;">
@@ -200,16 +200,17 @@
         <h2 class="title is-3">TL;DR</h2>
         <div class="content has-text-justified">
           <p>
-            Multimodal physics evaluation has three undetected construction practices that distort how the field measures
-            vision-language reasoning: <strong>train&ndash;eval contamination</strong> (single-stage 5-gram-Jaccard audits report
-            zero hits where a three-stage audit surfaces 134 SciInstruct near-duplicates), <strong>translation drift</strong>
-            (Sonnet 4.5 attains 30.5% on Estonian-original olympiad problems vs. 13.6% on English translations of the same
-            problems), and <strong>MCQ saturation</strong> (a 46-pp same-model score gradient between PhyX 4-way MCQ and
-            open-ended olympiad evaluation). We release four artifacts addressing these gaps:
-            <em>PhysCorp-A</em> (6,432-record three-stage-audited multimodal corpus), <em>PhysR1Corp</em> (2,268-record
-            closed-form RL pool), <em>PhysOlym-A</em> (500-problem 99.8%-novel-source held-out olympiad eval with native
-            difficulty labels and an EN/ET bilingual subset), and <em>Physics-R1</em>, a reference GSPO+DAPO recipe that
-            lifts PhysOlym-A liberal by +17.6 pp over the Qwen3-VL-8B-Thinking base.
+            Trackable improvement in multimodal physics reasoning rests on a training-and-evaluation system that is itself
+            rarely verified. Auditing that system end to end yields <strong>five findings</strong>: contamination slips past
+            single-stage n-gram audits (134 SciInstruct near-duplicates), translation shifts scores on identical problems
+            (30.5% vs. 13.6%), MCQ formats saturate (a 46-pp same-model gradient), shaped partial-credit rewards are easier
+            to exploit than to earn (binary beats dense on three of four open-ended benchmarks), and open-ended grades depend
+            on the judge (up to +37 pp leniency, rankings can reverse). We release the <strong>three verifiers</strong> that
+            close these gaps &mdash; a three-stage contamination audit, the binary answer verifier that supplies the RL
+            training reward, and an answer-judging harness with every per-record verdict &mdash; together with the artifacts
+            they certify: <em>PhysCorp-A</em> (6,432 records), <em>PhysR1Corp</em> (2,268), <em>PhysOlym-A</em> (500 held-out,
+            99.8% novel-source), and the <em>Physics-R1</em> reference recipe, which lifts PhysOlym-A liberal by +18.3 pp over
+            the Qwen3-VL-8B-Thinking base at the 3-seed mean.
           </p>
         </div>
       </div>
@@ -220,7 +221,7 @@
 
 <section class="section" style="background: #fafbfc;">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Three Findings</h2>
+    <h2 class="title is-3 has-text-centered">Five Findings</h2>
     <div class="columns" style="margin-top: 1.5rem;">
       <div class="column">
         <div class="finding-card">
@@ -255,7 +256,33 @@
           <p>
             On identical Sonnet 4.5 weights: <strong>79.7%</strong> on PhyX (4-way MCQ) &rarr; 50.4% on
             OlympiadBench-Physics (open-ended) &rarr; <strong>33.4%</strong> on PhysOlym-A (open-ended,
-            novel-source, audited). Format and novelty alone move the score 46 points on fixed weights.
+            novel-source, audited). Format, genre, and novelty move the score 46 points on fixed weights.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns" style="margin-top: 0.25rem; justify-content: center;">
+      <div class="column is-4">
+        <div class="finding-card">
+          <div class="finding-stat">3 / 4</div>
+          <div class="finding-label">open-ended benchmarks where binary beats dense</div>
+          <h4>Simple rewards resist exploitation</h4>
+          <p>
+            At matched step 60, the <strong>binary correctness reward</strong> beats dense partial-credit shaping by
+            8.9 pp (PhysReason), 4.9 pp (OlympiadBench), and 6.4 pp (PhysOlym-A), tying on PUB-OE. Shaped partial
+            credit pays out for answer form; the binary verifier is robust to being trained against.
+          </p>
+        </div>
+      </div>
+      <div class="column is-4">
+        <div class="finding-card">
+          <div class="finding-stat">+37 pp</div>
+          <div class="finding-label">max judge-leniency shift</div>
+          <h4>The judge is part of the measurement</h4>
+          <p>
+            Re-scoring every re-derivable column with a local Qwen3-32B judge shifts absolute scores by up to
+            <strong>+37 pp</strong> (&kappa; 0.24&ndash;0.82) and can reverse cross-model rankings &mdash; while every
+            base-to-trained lift keeps its sign. All per-record verdicts are released.
           </p>
         </div>
       </div>
@@ -266,7 +293,32 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">The Three-Stage Audit Pipeline</h2>
+    <h2 class="title is-3 has-text-centered">One System, Three Verifiers</h2>
+    <p class="has-text-centered" style="color: #6b7280; margin-bottom: 1rem;">
+      The release is organized as a single verifiable training-and-evaluation system.
+    </p>
+    <figure style="margin: 0 auto 1.5rem auto; max-width: 900px;">
+      <img src="static/images/fig1_system.png" alt="The verifiable training-and-evaluation system: Verifier 1 certifies the data boundary, Verifier 2 supplies the training reward, Verifier 3 judges open-ended answers.">
+    </figure>
+    <div class="pipeline-stage">
+      <h5>Verifier 1 &mdash; three-stage contamination audit</h5>
+      <p>Certifies the train/test boundary behind PhysCorp-A, PhysR1Corp, and the held-out PhysOlym-A (Findings 1&ndash;3). Ships as runnable code with every per-pair verdict.</p>
+    </div>
+    <div class="pipeline-stage">
+      <h5>Verifier 2 &mdash; binary answer verifier</h5>
+      <p>Supplies the RL training reward: a deterministic oracle from the same family as Verifier 3's strict layer (Finding 4).</p>
+    </div>
+    <div class="pipeline-stage">
+      <h5>Verifier 3 &mdash; answer-judging harness</h5>
+      <p>A deterministic strict layer plus an LLM liberal layer; every per-record verdict released and cross-checked by a local open-weight judge (Finding 5).</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Verifier 1: The Three-Stage Audit</h2>
     <div class="content" style="margin-top: 1.5rem;">
       <p class="has-text-centered" style="color: #6b7280;">
         Pairwise across the training pool and six public physics evals; pseudocode in
@@ -292,7 +344,9 @@
         <strong>Robustness:</strong> Embedder Spearman &rho; = 0.78 vs. OpenAI <code>text-embedding-3-large</code>
         (OpenAI candidate set is a strict subset of mxbai's at every threshold). Cross-judge agreement on the Sonnet-as-judge
         protocol over a 50-problem PhysOlym-A subset: Cohen's &kappa; = 0.44 vs. GPT-4o, with GPT-4o the more lenient judge
-        (self-grading direction is opposite to the feared bias).
+        (self-grading direction is opposite to the feared bias). A full local open-weight re-score (Qwen3-32B, identical
+        released prompts) spans &kappa; 0.24&ndash;0.82 and is uniformly more lenient than Sonnet &mdash; up to +37 pp &mdash;
+        the basis of Finding 5; all per-record verdicts are released.
       </div>
     </div>
   </div>
@@ -424,21 +478,22 @@
           <tr>
             <td colspan="7" style="background: #f3f4f6; font-style: italic; font-size: 0.9em;">Closed-source frontier</td>
           </tr>
-          <tr><td>Claude Sonnet 4.5</td><td>79.7</td><td>80.6</td><td>36.6</td><td>37.7</td><td>50.4</td><td>33.4</td></tr>
+          <tr><td>Claude Sonnet 4.5</td><td>79.7</td><td>80.6</td><td>49.1</td><td>25.4</td><td>50.4</td><td>33.4</td></tr>
           <tr><td>Gemini 2.5 Pro</td><td>75.1</td><td>49.8</td><td>38.8</td><td>33.4</td><td>37.4</td><td>12.2</td></tr>
-          <tr><td>GPT-4o</td><td>70.4</td><td>53.6</td><td>48.9</td><td>31.5</td><td>19.7</td><td>8.0</td></tr>
+          <tr><td>GPT-4o</td><td>70.4</td><td>53.6</td><td>51.1</td><td>31.0</td><td>19.7</td><td>19.5</td></tr>
           <tr>
             <td colspan="7" style="background: #f3f4f6; font-style: italic; font-size: 0.9em;">Open-source bases</td>
           </tr>
           <tr><td>Qwen3-VL-32B-Thinking</td><td>73.8</td><td>84.2</td><td>25.1</td><td>32.8</td><td>53.9</td><td>13.2</td></tr>
           <tr><td>Qwen3-VL-8B-Thinking (base)</td><td>73.7</td><td>74.4</td><td>23.9</td><td>35.3</td><td>39.3</td><td>8.0</td></tr>
           <tr><td>InternVL3-8B</td><td>46.8</td><td>43.1</td><td>13.3</td><td>23.5</td><td>10.4</td><td>4.0</td></tr>
+          <tr><td>LLaVA-OneVision-7B <span style="color:#9ca3af;">*</span></td><td>37.4</td><td>36.0</td><td>3.5</td><td>19.2</td><td>8.4</td><td>7.2</td></tr>
           <tr class="ours">
             <td>Physics-R1 (binary, 3-seed mean &plusmn; &sigma;)</td>
             <td>77.8 &plusmn; 0.3 <span class="delta">+4.1</span></td>
             <td>76.9 &plusmn; 0.3 <span class="delta">+2.5</span></td>
             <td>39.6 &plusmn; 6.4 <span class="delta">+15.7</span></td>
-            <td>34.8 &plusmn; 3.3 <span class="delta">&minus;0.5</span></td>
+            <td>34.5 &plusmn; 3.6 <span class="delta">&minus;0.8</span></td>
             <td>46.2 &plusmn; 1.5 <span class="delta">+6.9</span></td>
             <td>26.3 &plusmn; 1.7 <span class="delta">+18.3</span></td>
           </tr>
@@ -446,8 +501,8 @@
             <td>Physics-R1 (dense, ablation)</td>
             <td>78.3 <span class="delta">+4.6</span></td>
             <td>77.5 <span class="delta">+3.1</span></td>
-            <td>23.3</td>
-            <td>36.7 <span class="delta">+1.4</span></td>
+            <td>23.3 <span class="delta" style="color:#dc2626;">&minus;0.6</span></td>
+            <td>37.7 <span class="delta">+2.4</span></td>
             <td>40.5 <span class="delta">+1.2</span></td>
             <td>19.2 <span class="delta">+11.2</span></td>
           </tr>
@@ -457,7 +512,8 @@
 
     <p class="has-text-centered" style="color: #6b7280; margin-top: 1rem; font-size: 0.95em;">
       Physics-R1 binary lifts PhysOlym-A liberal +18.3 pp over the 8B base, still 7.1 pp below Sonnet 4.5.
-      Recipe is reported as evidence the audited corpus is trainable, not as a SOTA capability claim.
+      The recipe is reported as evidence the audited corpus supports training, not as a SOTA capability claim.<br>
+      <span style="font-size:0.9em;">* LLaVA-OneVision open-ended cells are scored by the local open-weight judge (protocol caveats in the paper appendix).</span>
     </p>
     <p class="has-text-centered" style="color: #6b7280; margin-top: 0.5rem; font-size: 0.85em;">
       <strong>3-seed sweep on PhysOlym-A liberal:</strong> seed-42 = 25.6, seed-17 = 25.0, seed-23 = 28.2
@@ -497,9 +553,11 @@ print(ds[0])  # {source, messages, solution, metadata}</code></pre>
   <div class="container is-max-desktop content">
     <h2 class="title is-3 has-text-centered">BibTeX</h2>
     <pre style="font-size: 0.9em;"><code>@misc{yang2026physicsr1,
-  title  = {Physics-R1: An Audited Olympiad Corpus and Recipe for Visual Physics Reasoning},
-  author = {Yang, Shan},
-  year   = {2026}
+  title         = {Physics-R1: An Audited Olympiad Corpus and Released Verifiers for Visual Physics Reasoning},
+  author        = {Yang, Shan},
+  year          = {2026},
+  eprint        = {2605.14040},
+  archivePrefix = {arXiv}
 }</code></pre>
   </div>
 </section>
